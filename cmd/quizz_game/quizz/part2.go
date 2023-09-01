@@ -56,11 +56,6 @@ func startQuizz(q_data []Question, timeAmnt int) {
 	num_corr := 0
 	num_wrong := 0
 
-	// run timer
-	go func() {
-		<-timer.C
-	}()
-
 	// run questions
 	go askQuestionsv2(q_data, &num_corr, &num_wrong, done)
 
