@@ -36,18 +36,12 @@ func askQuestions(records [][]string, s *QAnswer) {
 	}
 }
 
-func RunQuizz(file string) (QAnswer, error) {
+func RunQuizz(file *os.File) (QAnswer, error) {
 	correctAnsCnt := 0
 	wrongAnsCnt := 0
 	ans := QAnswer{correctAnsCnt, wrongAnsCnt}
 
-	f, err := os.Open(file)
-	defer f.Close()
-	if err != nil {
-		log.Fatal("Unable to open file "+file, err)
-	}
-
-	csvReader := csv.NewReader(f)
+	csvReader := csv.NewReader(file)
 	records, err := csvReader.ReadAll()
 	if err != nil {
 		log.Fatal("Failed to read csv")
