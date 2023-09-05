@@ -66,7 +66,6 @@ func buildPathMap(data []YamlRecord) map[string]string {
 		pathMap[record.Path] = record.Url
 	}
 
-	fmt.Println(pathMap)
 	return pathMap
 }
 func YAMLHandler(yml []byte, fallback http.Handler) (http.HandlerFunc, error) {
