@@ -1,9 +1,18 @@
 package story
 
 import (
-	"fmt"
+	"encoding/json"
+	"io"
 )
 
-func ParseJson() {
-	fmt.Println("There will be parser")
+func ParseJson(r io.Reader) (StoryMap, error) {
+	var story StoryMap
+	jsonReader := json.NewDecoder(r)
+	err := jsonReader.Decode(&story)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return story, nil
 }
