@@ -28,5 +28,6 @@ func main() {
 	fmt.Println("Server is listening...")
 	hdlr := story.NewHandler(storyMap)
 
+	fmt.Println()
 	log.Fatal(http.ListenAndServe(":8080", hdlr))
 }
