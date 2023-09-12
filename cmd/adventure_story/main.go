@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"os"
@@ -25,9 +26,11 @@ func main() {
 		log.Fatal("Failed to parse JSON file with story ", err)
 	}
 
-	fmt.Println("Server is listening...")
-	hdlr := story.NewHandler(storyMap)
+	//hdlr := story.NewHandler(storyMap)
 
-	fmt.Println()
+	// below handler with custom opts
+	hdlr := story.NewHandler(storyMap, story.SetTemplate(template.Must(template.New("").Parse(story.CustomHTMLTemplate))), story.SetCustomPathFn(story.CustomPathFn))
+
+	fmt.Println("Server is listening...")
 	log.Fatal(http.ListenAndServe(":8080", hdlr))
 }
